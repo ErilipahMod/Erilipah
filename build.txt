@@ -1,0 +1,6 @@
+displayName = Erilipah
+author = Dual, The Eri Team
+version = 0.1
+dllReferences = FastNoise
+modReferences = NetEasy
+includePDB = true
