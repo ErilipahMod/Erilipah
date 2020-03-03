@@ -14,15 +14,16 @@ namespace Erilipah
 {
     public static class UIExtensions
     {
-        public static ModifyInterfaceDelegate GetModifyInterfaceDel(this UserInterface @interface, string interfaceLayer, string interfaceName)
+        public static ModifyInterfaceDelegate GetModifyInterfaceDel(this UserInterface @interface, string aboveLayer, string name)
         {
             return layers =>
             {
-                int layerIndex = layers.FindIndex(layer => layer.Name.Equals(interfaceLayer));
+                int layerIndex = layers.FindIndex(layer => layer.Name.Equals(aboveLayer));
                 if (layerIndex != -1)
                 {
+                    layerIndex++;
                     layers.Insert(layerIndex, new LegacyGameInterfaceLayer(
-                        interfaceName,
+                        name,
                         delegate
                         {
                             // If the current UIState of the UserInterface is null, nothing will draw. We don't need to track a separate .visible value.

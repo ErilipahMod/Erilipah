@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 
 namespace Erilipah
@@ -41,5 +42,8 @@ namespace Erilipah
 
         public static MethodInfo SMethod(this Type t, string name)
             => (MethodInfo)GetOrMake((name, t), () => t.GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
+
+        public static TMember Member<TMember>(this Type t, string name, MemberTypes memberType, BindingFlags flags) where TMember : MemberInfo
+            => (TMember)GetOrMake((name, t), () => t.GetMember(name, memberType, flags).Single());
     }
 }
