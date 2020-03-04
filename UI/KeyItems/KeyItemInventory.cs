@@ -15,32 +15,34 @@ namespace Erilipah.UI.KeyItems
     {
         private bool open;
 
+        public IEnumerable<KeyItemSlot> Slots => Elements.OfType<KeyItemSlot>();
+
         public bool Open
         {
             get => open;
             set
             {
-                if (open == value)
+                if (open != value)
                 {
-                    return;
-                }
-
-                if (open = value)
-                {
-                    Main.editChest = false;
-                    Main.editSign = false;
-                    Main.npcShop = -1;
-                    Main.LocalPlayer.chest = -1;
-                }
-
-                foreach (var slot in Elements.OfType<KeyItemSlot>())
-                {
-                    slot.Visible = open;
+                    if (open = value)
+                    {
+                        Main.npcChatText = string.Empty;
+                        Main.editChest = false;
+                        Main.editSign = false;
+                        Main.npcShop = 0;
+                        Main.LocalPlayer.talkNPC = -1;
+                        Main.LocalPlayer.sign = -1;
+                        Main.LocalPlayer.chest = -1;
+                    }
+                    foreach (var slot in Slots)
+                    {
+                        slot.Visible = open;
+                    }
                 }
             }
         }
 
-        public void AddSlots(Texture2D backgroundTexture, int rowSize, int columnSize)
+        public void AddSlots(Texture2D backgroundTexture, int slotsPerRow, int rowSpacing, int columnSpacinng)
         {
             int iteration = 0;
             foreach (var item in KeyItemManager.GetAll())
@@ -49,8 +51,8 @@ namespace Erilipah.UI.KeyItems
                 MinHeight.Pixels += backgroundTexture.Height;
                 KeyItemSlot slot = new KeyItemSlot(backgroundTexture)
                 {
-                    HAlign = iteration % 5 / (float)rowSize,
-                    VAlign = iteration / 5 / (float)columnSize,
+                    Left = { Pixels = iteration % slotsPerRow * (backgroundTexture.Width + columnSpacinng) },
+                    Top = { Pixels = iteration / slotsPerRow * (backgroundTexture.Height + rowSpacing) },
                     Width = { Pixels = backgroundTexture.Width },
                     Height = { Pixels = backgroundTexture.Height },
                     Contained = item
@@ -65,7 +67,7 @@ namespace Erilipah.UI.KeyItems
         {
             base.Update(gameTime);
 
-            if ((!Main.playerInventory || Main.npcShop > -1 || Main.LocalPlayer.chest > -1) && Open)
+            if ((!Main.playerInventory || !string.IsNullOrEmpty(Main.npcChatText) || Main.editChest || Main.LocalPlayer.talkNPC != -1 || Main.LocalPlayer.sign != -1 || Main.LocalPlayer.chest > -1) && Open)
             {
                 Open = false;
             }

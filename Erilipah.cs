@@ -1,4 +1,3 @@
-using Erilipah.Runnables;
 using Erilipah.UI;
 using Microsoft.Xna.Framework;
 using System;
@@ -15,9 +14,7 @@ namespace Erilipah
 
         public event Action<Type> OnCrawlType;
 
-        public IList<Runnable> Runnables { get; private set; }
-
-        public IList<UserInterfaceWrapper> UIs { get; private set; }
+        public ICollection<UserInterfaceWrapper> UIs { get; private set; }
 
         public static Erilipah Instance => ModContent.GetInstance<Erilipah>();
 
@@ -25,8 +22,7 @@ namespace Erilipah
         {
             base.Load();
 
-            Runnables = new List<Runnable>();
-            UIs = new List<UserInterfaceWrapper>();
+            UIs = new SafeList<UserInterfaceWrapper>();
 
             Action runLoadFields = delegate { };
             Action runLoadMethods = delegate { };
@@ -105,24 +101,10 @@ namespace Erilipah
         {
             base.Unload();
 
-            Runnables = null;
             UIs = null;
 
             OnUnload?.Invoke();
             OnUnload = null;
-        }
-
-        public override void MidUpdateTimeWorld()
-        {
-            for (int i = Runnables.Count - 1; i >= 0; i--)
-            {
-                Runnables[i].Run();
-                if (!Runnables[i].Active)
-                {
-                    Runnables[i].OnEnd();
-                    Runnables.RemoveAt(i);
-                }
-            }
         }
 
         public override void UpdateUI(GameTime gameTime)

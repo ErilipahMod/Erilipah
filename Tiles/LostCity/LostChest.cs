@@ -8,8 +8,6 @@ using Terraria.ObjectData;
 
 namespace Erilipah.Tiles.LostCity
 {
-
-
 	public class LostChest : ModTile
 	{
 		public override void SetDefaults()
@@ -39,13 +37,15 @@ namespace Erilipah.Tiles.LostCity
 
 		public override bool HasSmartInteract() => true;
 
-		public override bool CanKillTile(int i, int j, ref bool blockDamaged)
-		{
-			return false;
-		}
+		public override bool CanKillTile(int i, int j, ref bool blockDamaged) => false;
 
 		public override bool NewRightClick(int i, int j)
 		{
+			// TODO: store the KeyItem and unlock it here
+			if ()
+			{
+
+			}
 			return true;
 		}
 

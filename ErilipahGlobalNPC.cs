@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Erilipah
 {
-    public partial class ErilipahNPC : GlobalNPC
+    public partial class ErilipahGlobalNPC : GlobalNPC
     {
         public override void EditSpawnPool(IDictionary<int, float> pool, NPCSpawnInfo spawnInfo)
         {

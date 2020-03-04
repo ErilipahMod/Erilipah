@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,12 +13,16 @@ namespace Erilipah.UI.KeyItems
 {
     public class KeyItemUIState : UIState
     {
+        [field: AutoInit(InitHooks.Load | InitHooks.Unload)]
+        public static KeyItemUIState Instance { get; }
+
+        public KeyItemInventory Inventory { get; private set; }
+
         [HookLoading(LoadHooks.PostLoad)]
         private static void OnLoad()
         {
             UserInterface ui = new UserInterface();
-            ui.SetState(new KeyItemUIState());
-
+            ui.SetState(Instance);
             Erilipah.Instance.UIs.Add(new UserInterfaceWrapper(
                 ui,
                 ui.GetModifyInterfaceDel("Vanilla: Inventory", "Erilipah: Key Items")
@@ -28,25 +33,25 @@ namespace Erilipah.UI.KeyItems
         {
             base.OnInitialize();
 
-            KeyItemInventory inventory = new KeyItemInventory
+            Inventory = new KeyItemInventory
             {
-                Left = { Pixels = 73 },
+                Left = { Pixels = 66 },
                 Top = { Pixels = Main.instance.invBottom },
                 Width = { Pixels = 120 },
                 Height = { Pixels = 40 }
             };
-            inventory.AddSlots(Main.inventoryBack15Texture, 6, 3); // TODO make a config for this shit
-            Append(inventory);
+            Inventory.AddSlots(Main.inventoryBack15Texture, 200 / Main.inventoryBack15Texture.Width + 1, 6, 2);
+            Append(Inventory);
 
-            Texture2D buttonTexture = ModContent.GetTexture("Terraria/UI/ButtonPlay");
+            Texture2D buttonTexture = ModContent.GetTexture("Erilipah/UI/KeyItems/OpenKeyItemButton");
             OpenKeyItemButton button = new OpenKeyItemButton(buttonTexture)
             {
-                Left = { Pixels = 410 },
-                Top = { Pixels = 270 },
+                Left = { Pixels = 422 },
+                Top = { Pixels = Main.instance.invBottom },
                 Width = { Pixels = buttonTexture.Width },
                 Height = { Pixels = buttonTexture.Height }
             };
-            button.OnClick += delegate { inventory.Open ^= true; };
+            button.OnClick += delegate { Inventory.Open ^= true; };
             Append(button);
         }
     }

@@ -26,22 +26,22 @@ namespace Erilipah
         }
 
         public static FieldInfo Field(this Type t, string name)
-            => (FieldInfo)GetOrMake((name, t), () => t.GetField(name, BindingFlags.Instance | BindingFlags.NonPublic));
+            => (FieldInfo)GetOrMake((name, t), () => t.GetField(name, BindingFlags.Instance | BindingFlags.Public |  BindingFlags.NonPublic));
 
         public static FieldInfo SField(this Type t, string name)
-            => (FieldInfo)GetOrMake((name, t), () => t.GetField(name, BindingFlags.Static | BindingFlags.NonPublic));
+            => (FieldInfo)GetOrMake((name, t), () => t.GetField(name, BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic));
 
         public static PropertyInfo Property(this Type t, string name)
-            => (PropertyInfo)GetOrMake((name, t), () => t.GetProperty(name, BindingFlags.Instance | BindingFlags.NonPublic));
+            => (PropertyInfo)GetOrMake((name, t), () => t.GetProperty(name, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic));
 
         public static PropertyInfo SProperty(this Type t, string name)
-            => (PropertyInfo)GetOrMake((name, t), () => t.GetProperty(name, BindingFlags.Static | BindingFlags.NonPublic));
+            => (PropertyInfo)GetOrMake((name, t), () => t.GetProperty(name, BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic));
 
         public static MethodInfo Method(this Type t, string name)
-            => (MethodInfo)GetOrMake((name, t), () => t.GetMethod(name, BindingFlags.Instance | BindingFlags.NonPublic));
+            => (MethodInfo)GetOrMake((name, t), () => t.GetMethod(name, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic));
 
         public static MethodInfo SMethod(this Type t, string name)
-            => (MethodInfo)GetOrMake((name, t), () => t.GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
+            => (MethodInfo)GetOrMake((name, t), () => t.GetMethod(name, BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic));
 
         public static TMember Member<TMember>(this Type t, string name, MemberTypes memberType, BindingFlags flags) where TMember : MemberInfo
             => (TMember)GetOrMake((name, t), () => t.GetMember(name, memberType, flags).Single());

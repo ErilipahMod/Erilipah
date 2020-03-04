@@ -3,6 +3,8 @@ using Erilipah.UI;
 using Erilipah.Walls;
 using Microsoft.Xna.Framework;
 using System;
+using System.Collections.Specialized;
+using System.Configuration;
 using System.Linq;
 using Terraria;
 using Terraria.ID;
@@ -42,6 +44,9 @@ namespace Erilipah
         public static bool Chance(this UnifiedRandom rand, float chance) => rand.NextFloat() < chance;
 
         public static int Area(this Rectangle rect) => rect.Width * rect.Height;
+
+        public static int GetInt(this NameValueCollection collection, string name) => int.Parse(collection[name]);
+        public static float GetFloat(this NameValueCollection collection, string name) => float.Parse(collection[name]);
     }
 
     public static class WorldgenExtensions

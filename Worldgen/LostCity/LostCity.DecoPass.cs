@@ -32,14 +32,14 @@ namespace Erilipah.Worldgen.LostCity
             private void IterateFloor(int i, int j, bool isRoof, bool isFloor)
             {
                 const float bannerChance = 0.05f;
-                const float chestChance = 0.02f;
 
                 // fuck it I'm hardcoding this for now
+                // TODO fix banners entirely
                 if (WorldGen.genRand.Chance(bannerChance) && !isFloor)
-                    WorldGen.Place2xX(i, j, (ushort)TileType<CityBanner>());
+                    WorldGen.Place2xX(i, j + 1, (ushort)TileType<CityBanner>());
 
-                if (WorldGen.genRand.Chance(chestChance) && !isRoof)
-                    WorldGen.Place2x2(i, j, (ushort)TileType<LostChest>(), 0);
+                // TODO put a lost city chest for each lost city key item
+
             }
         }
     }
