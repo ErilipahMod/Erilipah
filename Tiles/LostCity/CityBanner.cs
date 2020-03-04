@@ -12,9 +12,11 @@ namespace Erilipah.Tiles.LostCity
     {
         public override void SetDefaults()
         {
+            // BUG: banners be kinda broken
             Main.tileFrameImportant[Type] = true;
             Main.tileNoAttach[Type] = true;
             Main.tileLavaDeath[Type] = true;
+
             TileObjectData.newTile.CopyFrom(TileObjectData.Style2xX);
             TileObjectData.newTile.Height = 3;
             TileObjectData.newTile.CoordinateHeights = new[] { 16, 16, 16 };
@@ -22,6 +24,7 @@ namespace Erilipah.Tiles.LostCity
             TileObjectData.newTile.AnchorTop = new AnchorData(AnchorType.SolidTile | AnchorType.SolidSide | AnchorType.SolidBottom, TileObjectData.newTile.Width, 0);
             TileObjectData.newTile.StyleWrapLimit = 111;
             TileObjectData.addTile(Type);
+
             dustType = -1;
             disableSmartCursor = true;
             ModTranslation name = CreateMapEntryName();

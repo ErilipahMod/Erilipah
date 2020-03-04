@@ -41,7 +41,7 @@ namespace Erilipah.Tiles.LostCity
 
 		public override bool NewRightClick(int i, int j)
 		{
-			// TODO: store the KeyItem and unlock it here
+			// FINISH: store the KeyItem and unlock it here. call Unlock on the key instance. ez
 			if ()
 			{
 

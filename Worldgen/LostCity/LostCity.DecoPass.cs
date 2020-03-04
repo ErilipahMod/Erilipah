@@ -33,12 +33,11 @@ namespace Erilipah.Worldgen.LostCity
             {
                 const float bannerChance = 0.05f;
 
-                // fuck it I'm hardcoding this for now
-                // TODO fix banners entirely
+                // CLEAN: use the config
                 if (WorldGen.genRand.Chance(bannerChance) && !isFloor)
                     WorldGen.Place2xX(i, j + 1, (ushort)TileType<CityBanner>());
 
-                // TODO put a lost city chest for each lost city key item
+                // FINISH: put a lost city chest for each lost city key item
 
             }
         }
