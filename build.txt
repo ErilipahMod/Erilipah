@@ -4,3 +4,4 @@ version = 0.1
 dllReferences = FastNoise
 modReferences = NetEasy
 includePDB = true
+buildIgnore = *.fx, .gitattributes, .gitignore, .editorconfig, bin/*, obj/*, *.exe

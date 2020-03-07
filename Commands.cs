@@ -20,11 +20,11 @@ namespace Erilipah
             string type = args[0];
             switch (type)
             {
-                case "unlock-lost-key":
+                case "ulk-k":
                     KeyItemManager.Get<LostKey>().Unlock();
                     break;
 
-                case "lock-lost-key":
+                case "lk-k":
                     LostKey obj = KeyItemManager.Get<LostKey>();
                     typeof(KeyItem).Property("Unlocked").SetValue(obj, false);
                     break;

@@ -12,7 +12,7 @@ namespace Erilipah.Tiles.LostCity
 {
 	public class LostChest : ModTile
 	{
-		private static bool opened = false;
+		private static bool opening = false;
 
 		public override void SetDefaults()
 		{
@@ -42,9 +42,9 @@ namespace Erilipah.Tiles.LostCity
 		public override bool NewRightClick(int i, int j)
 		{
 			LostKey lostKey = KeyItemManager.Get<LostKey>();
-			if (!lostKey.Unlocked && !opened)
+			if (!lostKey.Unlocked && !opening)
 			{
-				opened = true;
+				opening = true;
 				lostKey.Unlock();
 				return true;
 			}
@@ -53,22 +53,28 @@ namespace Erilipah.Tiles.LostCity
 
 		public override void MouseOver(int i, int j)
 		{
-			if (KeyItemManager.Get<LostKey>().Unlocked)
+			if (!KeyItemManager.Get<LostKey>().Unlocked && !opening)
 			{
 				Main.LocalPlayer.showItemIconText = "Lost Chest";
 				Main.LocalPlayer.noThrow = 2;
 			}
 		}
 
-		public override void AnimateTile(ref int frame, ref int frameCounter)
+		public override void AnimateIndividualTile(int type, int i, int j, ref int frameXOffset, ref int frameYOffset)
 		{
+			opening = false; // TODO remove
+			frameXOffset = 0;
 			if (KeyItemManager.Get<LostKey>().Unlocked)
 			{
-				frame = 2 * 18;
+				frameYOffset = 2*38;
 			}
-			else if (opened && frameCounter > 15)
+			else if (opening)
 			{
-				frame = 1 * 18;
+				frameYOffset = 1*38;
+			}
+			else
+			{
+				frameYOffset = 0;
 			}
 		}
 	}
