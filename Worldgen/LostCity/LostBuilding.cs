@@ -1,7 +1,6 @@
 ﻿using Erilipah.Core;
 using Microsoft.Xna.Framework;
 using System;
-using System.Configuration;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;

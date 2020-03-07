@@ -4,7 +4,6 @@ using Erilipah.Walls;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Specialized;
-using System.Configuration;
 using System.Linq;
 using Terraria;
 using Terraria.ID;

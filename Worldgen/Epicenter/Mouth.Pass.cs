@@ -1,7 +1,6 @@
 ﻿using Erilipah.Core;
 using Erilipah.Walls;
 using Microsoft.Xna.Framework;
-using System.Configuration;
 using Terraria;
 using Terraria.World.Generation;
 using static Terraria.ModLoader.ModContent;

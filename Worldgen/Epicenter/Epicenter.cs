@@ -3,7 +3,6 @@ using Erilipah.Tiles.Epicenter;
 using Erilipah.Tiles.LostCity;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
-using System.Configuration;
 using Terraria.ModLoader.IO;
 using static Terraria.ModLoader.ModContent;
 

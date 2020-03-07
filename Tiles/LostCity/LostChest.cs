@@ -1,9 +1,7 @@
-﻿using Erilipah.Runnables;
-using Erilipah.KeyItems;
+﻿using Erilipah.KeyItems;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
-using Terraria.Enums;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
@@ -66,11 +64,11 @@ namespace Erilipah.Tiles.LostCity
 			frameXOffset = 0;
 			if (KeyItemManager.Get<LostKey>().Unlocked)
 			{
-				frameYOffset = 2*38;
+				frameYOffset = 2 * 38;
 			}
 			else if (opening)
 			{
-				frameYOffset = 1*38;
+				frameYOffset = 1 * 38;
 			}
 			else
 			{

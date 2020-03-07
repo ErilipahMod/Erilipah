@@ -1,7 +1,6 @@
 ﻿using Erilipah.Core;
 using Microsoft.Xna.Framework;
 using Noise;
-using System.Configuration;
 using Terraria;
 using Terraria.World.Generation;
 

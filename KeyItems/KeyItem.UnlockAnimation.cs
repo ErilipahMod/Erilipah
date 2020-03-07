@@ -1,11 +1,9 @@
-﻿using Erilipah.Effects.Handlers;
-using Erilipah.Runnables;
+﻿using Erilipah.Runnables;
 using Erilipah.UI.KeyItems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.Graphics.Effects;
-using Terraria.Graphics.Shaders;
 using Terraria.ModLoader;
 
 namespace Erilipah.KeyItems
@@ -86,7 +84,7 @@ namespace Erilipah.KeyItems
             private Vector2 GetDrawPosition()
             {
                 // Until lerp is > 0, just draw in the middle of the screen
-                Vector2 start = new Vector2(Main.screenWidth, Main.screenHeight - 125*2) / 2;
+                Vector2 start = new Vector2(Main.screenWidth, Main.screenHeight - 125 * 2) / 2;
                 if (lerp > 0)
                 {
                     Vector2 end = item.Container.GetDimensions().Center();

@@ -2,7 +2,6 @@
 using Erilipah.Tiles.Epicenter;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
 using Terraria;
 using Terraria.ID;

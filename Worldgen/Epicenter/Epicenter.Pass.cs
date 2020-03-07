@@ -1,6 +1,5 @@
 ﻿using Erilipah.Core;
 using Microsoft.Xna.Framework;
-using System.Configuration;
 using System.Runtime.CompilerServices;
 using Terraria;
 using Terraria.World.Generation;

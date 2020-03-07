@@ -23,9 +23,9 @@ namespace Erilipah.Runnables
         }
 
         public virtual bool Active => Scale > 0 &&
-            Position.X > 0 && 
-            Position.Y > 0 && 
-            Position.X < Main.screenWidth && 
+            Position.X > 0 &&
+            Position.Y > 0 &&
+            Position.X < Main.screenWidth &&
             Position.Y < Main.screenHeight;
 
         public virtual void Draw(SpriteBatch spriteBatch)

@@ -2,10 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria.UI;
 
 namespace Erilipah.Runnables
@@ -21,8 +18,8 @@ namespace Erilipah.Runnables
 
         public static bool IsActive(Type type)
         {
-            return Erilipah.Instance.UIs.Any(uiw => 
-                uiw.Interface.CurrentState is AnimState animState && 
+            return Erilipah.Instance.UIs.Any(uiw =>
+                uiw.Interface.CurrentState is AnimState animState &&
                 animState.container.GetType() == type
                 );
         }

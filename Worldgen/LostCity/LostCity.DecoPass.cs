@@ -1,7 +1,5 @@
 ﻿using Erilipah.Core;
 using Erilipah.Tiles.LostCity;
-using System;
-using System.Configuration;
 using Terraria;
 using Terraria.World.Generation;
 using static Terraria.ModLoader.ModContent;
