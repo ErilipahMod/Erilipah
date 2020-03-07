@@ -1,14 +1,29 @@
 ﻿using Erilipah.Worldgen;
 using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using Terraria.World.Generation;
 
-namespace Erilipah
+namespace Erilipah.Core
 {
     public class ErilipahWorld : ModWorld
     {
+        public static ErilipahWorld Instance => ModContent.GetInstance<ErilipahWorld>();
+
+        public event Action OnPostUpdate;
+
+        public override void Initialize()
+        {
+            OnPostUpdate = null;
+        }
+
+        public override void PostUpdate()
+        {
+            OnPostUpdate?.Invoke();
+        }
+
         public override void ModifyWorldGenTasks(List<GenPass> tasks, ref float totalWeight)
         {
             BiomeManager.HandleWorldGenTasks(tasks);

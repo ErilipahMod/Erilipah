@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 
-namespace Erilipah
+namespace Erilipah.Core
 {
     /// <summary>
     /// Identical to a <see cref="List{T}"/>, but any operations that would modify an enumerating collection are queued to take place after the enumeration is finished.

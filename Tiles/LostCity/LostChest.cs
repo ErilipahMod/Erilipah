@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Erilipah.Runnables;
+using Erilipah.KeyItems;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.Enums;
@@ -10,6 +12,8 @@ namespace Erilipah.Tiles.LostCity
 {
 	public class LostChest : ModTile
 	{
+		private static bool opened = false;
+
 		public override void SetDefaults()
 		{
 			Main.tileSpelunker[Type] = true;
@@ -22,11 +26,7 @@ namespace Erilipah.Tiles.LostCity
 
 			TileObjectData.newTile.CopyFrom(TileObjectData.Style2x2);
 			TileObjectData.newTile.Origin = new Point16(0, 1);
-			TileObjectData.newTile.CoordinateHeights = new[] { 16, 18 };
-			TileObjectData.newTile.AnchorInvalidTiles = new[] { 127 };
-			TileObjectData.newTile.StyleHorizontal = true;
 			TileObjectData.newTile.LavaDeath = false;
-			TileObjectData.newTile.AnchorBottom = new AnchorData(AnchorType.SolidTile | AnchorType.SolidWithTop | AnchorType.SolidSide, TileObjectData.newTile.Width, 0);
 			TileObjectData.addTile(Type);
 
 			this.AddMapEntry(new Color(200, 200, 200), "Lost Chest");
@@ -35,24 +35,41 @@ namespace Erilipah.Tiles.LostCity
 			adjTiles = new int[] { TileID.Containers };
 		}
 
-		public override bool HasSmartInteract() => true;
+		public override bool HasSmartInteract() => KeyItemManager.Get<LostKey>().Unlocked;
 
 		public override bool CanKillTile(int i, int j, ref bool blockDamaged) => false;
 
 		public override bool NewRightClick(int i, int j)
 		{
-			// FINISH: store the KeyItem and unlock it here. call Unlock on the key instance. ez
-			if ()
+			LostKey lostKey = KeyItemManager.Get<LostKey>();
+			if (!lostKey.Unlocked && !opened)
 			{
-
+				opened = true;
+				lostKey.Unlock();
+				return true;
 			}
-			return true;
+			return false;
 		}
 
 		public override void MouseOver(int i, int j)
 		{
-			Main.LocalPlayer.showItemIconText = "Lost Chest";
-			Main.LocalPlayer.noThrow = 2;
+			if (KeyItemManager.Get<LostKey>().Unlocked)
+			{
+				Main.LocalPlayer.showItemIconText = "Lost Chest";
+				Main.LocalPlayer.noThrow = 2;
+			}
+		}
+
+		public override void AnimateTile(ref int frame, ref int frameCounter)
+		{
+			if (KeyItemManager.Get<LostKey>().Unlocked)
+			{
+				frame = 2 * 18;
+			}
+			else if (opened && frameCounter > 15)
+			{
+				frame = 1 * 18;
+			}
 		}
 	}
 }

@@ -1,5 +1,7 @@
-﻿using Erilipah.Walls;
+﻿using Erilipah.Core;
+using Erilipah.Walls;
 using Microsoft.Xna.Framework;
+using System.Configuration;
 using Terraria;
 using Terraria.World.Generation;
 using static Terraria.ModLoader.ModContent;
@@ -12,16 +14,6 @@ namespace Erilipah.Worldgen.Epicenter
         {
             private static Rectangle Area => BiomeManager.Get<Epicenter>().Area;
 
-            /// <summary>A larger attenuation means a longer spike. Must be within range (0, 1).</summary>
-            public const float OuterSpikeAttenuation = 1 - 1 / 7f;
-            /// <summary>A larger attenuation means a longer spike. Must be within range (0, 1).</summary>
-            public const float InnerSpikeAttenuation = 1 - 1 / 5f;
-
-            /// <summary>A larger base width means a thicker spike. Must be greater than 0.</summary>
-            public const int OuterSpikeBaseWidth = 18;
-            /// <summary>A larger base width means a thicker spike. Must be greater than 0.</summary>
-            public const int InnerSpikeBaseWidth = 18;
-
             public string GenerateAfter => "Corruption";
             public float Weight => 300;
 
@@ -29,11 +21,13 @@ namespace Erilipah.Worldgen.Epicenter
             {
                 progress.Message = "Erilipah Epicenter";
 
-                // Outer spikes
-                GenerateSpikePair(Area.Center.X, 60, OuterSpikeBaseWidth, OuterSpikeAttenuation);
+                var o_baseWidth = ConfigReader.Get<int>("worldgen.mouth.outer spike base width");
+                var o_attenuation = ConfigReader.Get<float>("worldgen.mouth.outer spike attenuation");
+                GenerateSpikePair(Area.Center.X, 60, o_baseWidth, o_attenuation);
 
-                // Inner spikes
-                GenerateSpikePair(Area.Center.X, 35, InnerSpikeBaseWidth, InnerSpikeAttenuation);
+                var i_baseWidth = ConfigReader.Get<int>("worldgen.mouth.inner spike base width");
+                var i_attenuation = ConfigReader.Get<float>("worldgen.mouth.inner spike base width");
+                GenerateSpikePair(Area.Center.X, 35, i_baseWidth, i_attenuation);
 
                 int pitStart = WorldgenExtensions.GetLowestInRange(Area.Center.X - 10, Area.Center.X + 10, (int)WorldGen.worldSurfaceLow, p => WorldGen.SolidOrSlopedTile(p.X, p.Y));
                 GeneratePit(Area.Center.X, pitStart - 6);
@@ -41,7 +35,7 @@ namespace Erilipah.Worldgen.Epicenter
 
             private static void GeneratePit(int i, int j)
             {
-                const int basinDepth = 30;
+                int basinDepth = ConfigReader.Get<int>("worldgen.mouth.basin depth");
 
                 float widthL = 3;
                 float widthR = 3;
@@ -125,12 +119,12 @@ namespace Erilipah.Worldgen.Epicenter
                         WorldGen.PlaceTile(i + k * direction, j, TileType<Tiles.Epicenter.InfectedStone>(), forced: true);
                     }
 
-                    if (WorldGen.genRand.NextFloat() > attenuation)
+                    if (WorldGen.genRand.NextFloat() < attenuation)
                     {
                         baseWidth--;
                     }
 
-                    if (WorldGen.genRand.NextFloat() > attenuation)
+                    if (WorldGen.genRand.NextFloat() < attenuation)
                     {
                         i += 1 * direction;
                     }

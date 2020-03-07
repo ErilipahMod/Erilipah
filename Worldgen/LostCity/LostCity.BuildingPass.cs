@@ -59,7 +59,7 @@ namespace Erilipah.Worldgen.LostCity
                 ErectBuildings(leftSide);
                 ErectBuildings(rightSide);
 
-                BiomeManager.Get<LostCity>().Buildings = leftSide.Concat(rightSide);
+                BiomeManager.Get<LostCity>().buildings = leftSide.Concat(rightSide).ToList();
             }
         }
     }

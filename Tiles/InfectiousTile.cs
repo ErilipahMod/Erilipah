@@ -1,6 +1,8 @@
-﻿using Erilipah.Tiles.Epicenter;
+﻿using Erilipah.Core;
+using Erilipah.Tiles.Epicenter;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using Terraria;
 using Terraria.ID;
@@ -10,7 +12,7 @@ namespace Erilipah.Tiles
 {
     public abstract class InfectiousTile : ModTile
     {
-        public const int Range = 6;
+        public static int Range => ConfigReader.Get<int>("infectious tile range");
 
         public static int Default => ModContent.TileType<InfectedGlob>();
 

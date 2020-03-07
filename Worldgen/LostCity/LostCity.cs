@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using System.Collections.Generic;
+using System.Linq;
 using Terraria;
 using Terraria.ModLoader.IO;
 using static Terraria.ModLoader.ModContent;
@@ -10,7 +11,7 @@ namespace Erilipah.Worldgen.LostCity
     {
         public Rectangle Area { get; private set; }
 
-        public IEnumerable<LostBuilding> Buildings { get; private set; }
+        private IList<LostBuilding> buildings;
 
         public override IEnumerable<int> BiomeTileTypes => new[]
         {
@@ -31,6 +32,7 @@ namespace Erilipah.Worldgen.LostCity
         {
             compound[nameof(Area)] = Area;
         }
+
         public override void Load(TagCompound compound)
         {
             Area = compound.Get<Rectangle>(nameof(Area));

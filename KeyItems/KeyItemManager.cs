@@ -11,6 +11,8 @@ namespace Erilipah.KeyItems
 
         public static T Get<T>() where T : KeyItem => (T)items[typeof(T)];
 
+        public static KeyItem Get(Type type) => items[type];
+
         public static IEnumerable<KeyItem> GetAll() => items.Values;
 
         [HookLoading(LoadHooks.Load)]

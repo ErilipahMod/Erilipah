@@ -1,4 +1,7 @@
-﻿using Erilipah.Tiles.LostCity;
+﻿using Erilipah.Core;
+using Erilipah.Tiles.LostCity;
+using System;
+using System.Configuration;
 using Terraria;
 using Terraria.World.Generation;
 using static Terraria.ModLoader.ModContent;
@@ -17,7 +20,8 @@ namespace Erilipah.Worldgen.LostCity
             {
                 progress.Message = "Decorating the Lost City";
 
-                foreach (var building in BiomeManager.Get<LostCity>().Buildings)
+                var buildings = BiomeManager.Get<LostCity>().buildings;
+                foreach (var building in buildings)
                 {
                     for (int j = building.Area.Top; j <= building.Area.Bottom; j += building.FloorHeight)
                     {
@@ -27,18 +31,33 @@ namespace Erilipah.Worldgen.LostCity
                         }
                     }
                 }
+
+                var lostChestBuilding = WorldGen.genRand.Next(buildings);
+                GenLostChest(lostChestBuilding);
+            }
+
+            private void GenLostChest(LostBuilding lostChestBuilding)
+            {
+                ushort type = (ushort)TileType<LostChest>();
+                while (true)
+                {
+                    int i = WorldGen.genRand.Next(lostChestBuilding.Area.Left + 1, lostChestBuilding.Area.Right);
+                    int j = lostChestBuilding.Area.Bottom - WorldGen.genRand.Next(lostChestBuilding.Floors) * lostChestBuilding.FloorHeight;
+
+                    WorldGen.Place2x2(i, j - 2, type, 0);
+                    if (Framing.GetTileSafely(i, j - 2).active() && Main.tile[i, j - 2].type == type)
+                    {
+                        break;
+                    }
+                }
             }
 
             private void IterateFloor(int i, int j, bool isRoof, bool isFloor)
             {
-                const float bannerChance = 0.05f;
+                float bannerChance = ConfigReader.Get<float>("worldgen.lost city.banners per tile");
 
-                // CLEAN: use the config
-                if (WorldGen.genRand.Chance(bannerChance) && !isFloor)
+                if (!isFloor && WorldGen.genRand.Chance(bannerChance))
                     WorldGen.Place2xX(i, j + 1, (ushort)TileType<CityBanner>());
-
-                // FINISH: put a lost city chest for each lost city key item
-
             }
         }
     }

@@ -1,0 +1,29 @@
+﻿{
+  "worldgen": {
+    "epicenter": {
+      "surface width": 200,
+      "world edge offset": 0.05
+    },
+
+    "mouth": {
+      // A larger attenuation means a shorter spike. Must be within range (0, 1).
+      // A larger base width means a thicker spike. Must be greater than 0.
+      "outer spike attenuation": 0.142,
+      "outer spike base width": 18,
+      "inner spike attenuation": 0.20,
+      "inner spike base width": 18,
+      "basin depth": 30
+    },
+
+    "tunnels": {
+      "maze depth": 250
+    },
+
+    "lost city": {
+      "house bridge height": 8,
+      "banners per tile": 0.04
+    }
+  },
+
+  "infectious tile range": 6
+}

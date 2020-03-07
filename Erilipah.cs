@@ -1,3 +1,4 @@
+using Erilipah.Core;
 using Erilipah.UI;
 using Microsoft.Xna.Framework;
 using System;
@@ -10,13 +11,13 @@ namespace Erilipah
 {
     public class Erilipah : Mod
     {
+        public static Erilipah Instance => ModContent.GetInstance<Erilipah>();
+
         public event Action OnUnload;
 
         public event Action<Type> OnCrawlType;
 
         public ICollection<UserInterfaceWrapper> UIs { get; private set; }
-
-        public static Erilipah Instance => ModContent.GetInstance<Erilipah>();
 
         public override void Load()
         {

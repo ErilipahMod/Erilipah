@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace Erilipah
+namespace Erilipah.Core
 {
     public static class ReflectionHelper
     {
@@ -26,7 +26,7 @@ namespace Erilipah
         }
 
         public static FieldInfo Field(this Type t, string name)
-            => (FieldInfo)GetOrMake((name, t), () => t.GetField(name, BindingFlags.Instance | BindingFlags.Public |  BindingFlags.NonPublic));
+            => (FieldInfo)GetOrMake((name, t), () => t.GetField(name, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic));
 
         public static FieldInfo SField(this Type t, string name)
             => (FieldInfo)GetOrMake((name, t), () => t.GetField(name, BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic));

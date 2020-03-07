@@ -1,4 +1,5 @@
-﻿using Erilipah.UI.KeyItems;
+﻿using Erilipah.Runnables;
+using Erilipah.UI.KeyItems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -10,6 +11,8 @@ namespace Erilipah.KeyItems
 {
     public abstract class KeyItem
     {
+        private bool unlocking = false;
+
         public bool Unlocked { get; private set; } = false;
 
         public KeyItemSlot Container { get; set; }
@@ -20,14 +23,24 @@ namespace Erilipah.KeyItems
 
         public void Unlock()
         {
+            if (Unlocked || unlocking)
+            {
+                return;
+            }
+
             if (!Main.playerInventory)
             {
                 Main.LocalPlayer.ToggleInv();
             }
 
             UnlockAnimation anim = new UnlockAnimation(this);
-            anim.OnFinish += () => Unlocked = true;
+            anim.OnFinish += () =>
+            {
+                Unlocked = true;
+                unlocking = false;
+            };
             anim.Start();
+            unlocking = true;
         }
 
         /// <summary>

@@ -1,5 +1,7 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Erilipah.Core;
+using Microsoft.Xna.Framework;
 using System;
+using System.Configuration;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
@@ -83,7 +85,7 @@ namespace Erilipah.Worldgen.LostCity
 
         public void ConnectTo(LostBuilding other)
         {
-            const int bridgeHeight = 8;
+            int bridgeHeight = ConfigReader.Get<int>("worldgen.lost city.house bridge height");
 
             int right = Math.Max(Area.Left, other.Area.Left);
             int left = Math.Min(Area.Right, other.Area.Right);

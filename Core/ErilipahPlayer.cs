@@ -6,7 +6,7 @@ using Terraria;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
-namespace Erilipah
+namespace Erilipah.Core
 {
     public class ErilipahPlayer : ModPlayer
     {

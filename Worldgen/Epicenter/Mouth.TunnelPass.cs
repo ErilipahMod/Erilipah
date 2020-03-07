@@ -1,5 +1,7 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Erilipah.Core;
+using Microsoft.Xna.Framework;
 using Noise;
+using System.Configuration;
 using Terraria;
 using Terraria.World.Generation;
 
@@ -14,7 +16,7 @@ namespace Erilipah.Worldgen.Epicenter
 
             public void Generate(GenerationProgress progress)
             {
-                const int tunnelsDepth = 250;
+                int tunnelsDepth = ConfigReader.Get<int>("worldgen.tunnels.maze depth");
 
                 progress.Message = "Erilipah Tunnels";
 

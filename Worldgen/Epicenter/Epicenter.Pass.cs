@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Erilipah.Core;
+using Microsoft.Xna.Framework;
+using System.Configuration;
 using System.Runtime.CompilerServices;
 using Terraria;
 using Terraria.World.Generation;
@@ -22,7 +24,7 @@ namespace Erilipah.Worldgen.Epicenter
 
             private static void SetArea(GenerationProgress progress)
             {
-                const float xPercent = 0.05f;
+                var xPercent = ConfigReader.Get<float>("worldgen.epicenter.world edge offset");
 
                 var dungeonLeft = Main.dungeonX < Main.maxTilesX / 2;
 

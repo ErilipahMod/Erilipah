@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Terraria.UI;
 
-namespace Erilipah
+namespace Erilipah.Runnables
 {
     public abstract class UIAnimation
     {
@@ -18,6 +18,16 @@ namespace Erilipah
         public event Action OnFinish;
 
         public abstract string AboveLayer { get; }
+
+        public static bool IsActive(Type type)
+        {
+            return Erilipah.Instance.UIs.Any(uiw => 
+                uiw.Interface.CurrentState is AnimState animState && 
+                animState.container.GetType() == type
+                );
+        }
+
+        public bool Active => !finished;
 
         public void Finish()
         {
@@ -54,7 +64,7 @@ namespace Erilipah
 
         private class AnimState : UIState
         {
-            private readonly UIAnimation container;
+            internal readonly UIAnimation container;
 
             public AnimState(UIAnimation container)
             {

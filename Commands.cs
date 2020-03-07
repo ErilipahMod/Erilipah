@@ -1,4 +1,5 @@
-﻿using Erilipah.KeyItems;
+﻿using Erilipah.Core;
+using Erilipah.KeyItems;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -28,7 +28,6 @@ namespace Erilipah
                         name,
                         delegate
                         {
-                            // If the current UIState of the UserInterface is null, nothing will draw. We don't need to track a separate .visible value.
                             @interface.Draw(Main.spriteBatch, new GameTime());
                             return true;
                         },
