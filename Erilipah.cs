@@ -1,4 +1,5 @@
 using Erilipah.Core;
+using Erilipah.Runnables;
 using Erilipah.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -12,7 +13,7 @@ using Terraria.UI;
 
 namespace Erilipah
 {
-    public class Erilipah : Mod
+    public partial class Erilipah : Mod
     {
         public static Erilipah Instance => ModContent.GetInstance<Erilipah>();
 
@@ -20,14 +21,10 @@ namespace Erilipah
 
         public event Action<Type> OnCrawlType;
 
-        public RenderTarget2D ScreenPostFilters { get; private set; }
-
         public ICollection<UserInterfaceWrapper> UIs { get; private set; }
 
         public override void Load()
         {
-            base.Load();
-
             UIs = new SafeList<UserInterfaceWrapper>();
 
             Action runLoadFields = delegate { };
@@ -101,25 +98,14 @@ namespace Erilipah
             runPostLoad();
 
             OnCrawlType = null;
-
-            Filters.Scene.OnPostDraw += Scene_OnPostDraw;
         }
 
         public override void Unload()
         {
-            base.Unload();
-
             UIs = null;
 
             OnUnload?.Invoke();
             OnUnload = null;
-
-            Filters.Scene.OnPostDraw -= Scene_OnPostDraw;
-        }
-
-        private void Scene_OnPostDraw()
-        {
-            ScreenPostFilters = Main.screenTarget;
         }
 
         public override void UpdateUI(GameTime gameTime)

@@ -1,5 +1,6 @@
 ﻿using Erilipah.Core;
 using Erilipah.KeyItems;
+using Terraria;
 using Terraria.ModLoader;
 
 namespace Erilipah
@@ -16,7 +17,7 @@ namespace Erilipah
             switch (type)
             {
                 case "ulk-k":
-                    KeyItemManager.Get<LostKey>().Unlock();
+                    KeyItemManager.Get<LostKey>().Unlock(caller.Player.Center);
                     break;
 
                 case "lk-k":

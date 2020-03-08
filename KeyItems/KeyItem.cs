@@ -20,7 +20,7 @@ namespace Erilipah.KeyItems
 
         public virtual Rectangle? Frame => null;
 
-        public void Unlock()
+        public void Unlock(Vector2 origin)
         {
             if (Unlocked || unlocking)
             {
@@ -32,7 +32,7 @@ namespace Erilipah.KeyItems
                 Main.LocalPlayer.ToggleInv();
             }
 
-            UnlockAnimation anim = new UnlockAnimation(this);
+            UnlockAnimation anim = new UnlockAnimation(this, origin - Main.screenPosition);
             anim.OnFinish += () =>
             {
                 Unlocked = true;

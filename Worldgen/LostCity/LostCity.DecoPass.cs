@@ -25,7 +25,7 @@ namespace Erilipah.Worldgen.LostCity
                     {
                         for (int i = building.Area.Left + 1; i < building.Area.Right; i++)
                         {
-                            IterateFloor(i, j, j == building.Area.Top, j == building.Area.Bottom);
+                            IterateFloor(i, j, j == building.Area.Bottom);
                         }
                     }
                 }
@@ -50,7 +50,7 @@ namespace Erilipah.Worldgen.LostCity
                 }
             }
 
-            private void IterateFloor(int i, int j, bool isRoof, bool isFloor)
+            private void IterateFloor(int i, int j, bool isFloor)
             {
                 float bannerChance = ConfigReader.Get<float>("worldgen.lost city.banners per tile");
 

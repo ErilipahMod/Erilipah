@@ -14,6 +14,7 @@ namespace Erilipah.Runnables
         public Vector2 Acceleration;
         public Rectangle? Frame;
         public float Scale = 1;
+        public float ScaleChange;
         public float Rotation;
         public float RotationChange;
 
@@ -28,9 +29,9 @@ namespace Erilipah.Runnables
             Position.X < Main.screenWidth &&
             Position.Y < Main.screenHeight;
 
-        public virtual void Draw(SpriteBatch spriteBatch)
+        public virtual void Draw(SpriteBatch sb)
         {
-            spriteBatch.Draw(texture, Position, Frame, DrawColor, Rotation, (Frame?.Size() ?? texture.Size()) / 2, Scale, SpriteEffects.None, 0);
+            sb.Draw(texture, Position, Frame, DrawColor, Rotation, (Frame?.Size() ?? texture.Size()) / 2, Scale, SpriteEffects.None, 0);
         }
 
         public virtual void Update()
@@ -38,6 +39,9 @@ namespace Erilipah.Runnables
             Velocity += Acceleration;
             Position += Velocity;
             Rotation += RotationChange;
+            Scale += ScaleChange;
         }
+
+        public virtual void OnKill() { }
     }
 }

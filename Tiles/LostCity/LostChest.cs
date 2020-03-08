@@ -27,8 +27,8 @@ namespace Erilipah.Tiles.LostCity
 			TileObjectData.newTile.LavaDeath = false;
 			TileObjectData.addTile(Type);
 
-			this.AddMapEntry(new Color(200, 200, 200), "Lost Chest");
-			dustType = DustID.Granite;
+			this.AddMapEntry(new Color(200, 100, 200), "Lost Chest");
+			dustType = DustID.PurpleCrystalShard;
 			disableSmartCursor = true;
 			adjTiles = new int[] { TileID.Containers };
 		}
@@ -43,7 +43,9 @@ namespace Erilipah.Tiles.LostCity
 			if (!lostKey.Unlocked && !opening)
 			{
 				opening = true;
-				lostKey.Unlock();
+				i -= Main.tile[i, j].frameX / 18;
+				j -= Main.tile[i, j].frameY / 18;
+				lostKey.Unlock(new Point(i + 1, j + 1).ToWorldCoordinates(0, 0));
 				return true;
 			}
 			return false;
@@ -60,7 +62,6 @@ namespace Erilipah.Tiles.LostCity
 
 		public override void AnimateIndividualTile(int type, int i, int j, ref int frameXOffset, ref int frameYOffset)
 		{
-			opening = false; // TODO remove
 			frameXOffset = 0;
 			if (KeyItemManager.Get<LostKey>().Unlocked)
 			{

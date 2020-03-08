@@ -27,6 +27,7 @@ namespace Erilipah.Runnables
                 particles[i].Update();
                 if (!particles[i].Active)
                 {
+                    particles[i].OnKill();
                     particles.RemoveAt(i);
                 }
             }
