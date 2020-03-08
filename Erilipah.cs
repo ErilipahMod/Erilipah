@@ -1,13 +1,9 @@
 using Erilipah.Core;
-using Erilipah.Runnables;
 using Erilipah.UI;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using Terraria;
-using Terraria.Graphics.Effects;
 using Terraria.ModLoader;
 using Terraria.UI;
 

@@ -1,6 +1,5 @@
 ﻿using Erilipah.Core;
 using Erilipah.KeyItems;
-using Terraria;
 using Terraria.ModLoader;
 
 namespace Erilipah
