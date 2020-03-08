@@ -19,7 +19,7 @@ namespace Erilipah.Tiles.Epicenter
             AddMapEntry(new Color(27, 25, 30));
 
             dustType = DustID.Stone;
-            drop = ModContent.ItemType<Items.Epicenter.Placeables.InfectedSoil>();
+            drop = ModContent.ItemType<Items.Epicenter.Placeables.InfectedStone>();
             soundType = 21;
             soundStyle = 1;
             mineResist = 2f;
