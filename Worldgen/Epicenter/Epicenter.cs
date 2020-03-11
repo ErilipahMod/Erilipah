@@ -3,8 +3,11 @@ using Erilipah.Tiles.Epicenter;
 using Erilipah.Tiles.LostCity;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
+using Terraria;
 using Terraria.ModLoader.IO;
+using TFilters = Terraria.Graphics.Effects.Filters;
 using static Terraria.ModLoader.ModContent;
+using Erilipah.Effects;
 
 namespace Erilipah.Worldgen.Epicenter
 {
@@ -23,6 +26,18 @@ namespace Erilipah.Worldgen.Epicenter
         {
             new Pass()
         };
+
+        public override void OnUpdateVisuals()
+        {
+            if (GetInBiome(Main.LocalPlayer))
+            {
+                TFilters.Scene.Activate(ShaderLoader.ErilipahFx, Main.LocalPlayer.Center);
+            }
+            else
+            {
+                TFilters.Scene[ShaderLoader.ErilipahFx].Deactivate();
+            }
+        }
 
         public override void Save(TagCompound compound)
         {

@@ -53,14 +53,13 @@ namespace Erilipah.Worldgen.LostCity
             for (int j = Area.Top + 1; j < Area.Bottom; j++)
             {
                 // Clear out the inside
-                if (j > Area.Top)
-                    for (int i = Area.Left + 1; i <= Area.Right - 1; i++)
-                    {
-                        WorldGen.KillTile(i, j);
+                for (int i = Area.Left + 1; i <= Area.Right - 1; i++)
+                {
+                    WorldGen.KillTile(i, j);
 
-                        WorldGen.KillWall(i, j);
-                        WorldGen.PlaceWall(i, j, ModContent.WallType<Walls.LostCity.LostBrickWall>());
-                    }
+                    WorldGen.KillWall(i, j);
+                    WorldGen.PlaceWall(i, j, ModContent.WallType<Walls.LostCity.LostBrickWall>());
+                }
             }
         }
 

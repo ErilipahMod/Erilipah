@@ -114,9 +114,7 @@ namespace Erilipah.KeyItems
 
             private class GlowyParticle : Particle
             {
-                public GlowyParticle() : base(ModContent.GetTexture("Erilipah/KeyItems/WhiteParticle"))
-                {
-                }
+                public GlowyParticle() : base(ModContent.GetTexture("Erilipah/KeyItems/WhiteParticle")) { }
 
                 public override void Update()
                 {

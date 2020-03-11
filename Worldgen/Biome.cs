@@ -20,8 +20,6 @@ namespace Erilipah.Worldgen
 
         public virtual void OnInitialize() { }
         public virtual void OnUpdateVisuals() { }
-        public virtual void OnUpdateTileCounts() { }
-        public virtual void OnResetTileCounts() { }
         public virtual void EditSpawnPool(IDictionary<int, float> pool, NPCSpawnInfo spawnInfo) { }
         public virtual void EditSpawnRate(Player player, ref int spawnRate, ref int maxSpawns) { }
         public virtual void EditSpawnRange(Player player, ref int spawnRangeX, ref int spawnRangeY, ref int safeRangeX, ref int safeRangeY) { }

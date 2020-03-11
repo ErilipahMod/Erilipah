@@ -1,12 +1,20 @@
-sampler uImage0 : register(s0);
+sampler uImage0 : register(s0); // The texture that you are currently drawing.
+sampler uImage1 : register(s1);
 float3 uColor;
 float uTime;
+float uSaturation;
+float uOpacity;
 float4 uSourceRect;
+float2 uWorldPosition;
 float2 uImageSize0;
+float2 uImageSize1;
 
 float4 CoronaFx(float4 sampleColor : COLOR0, float2 coords : TEXCOORD0) : COLOR0
 {	
-	float2 centreCoords = float2(coords.x - 0.5, coords.y - 0.5) * 2;
+    // Get the center of the shader
+	float2 centreCoords = (coords - 0.5) * 2;
+    
+    // Dot a value gets a nice 0-1 circle gradient
 	float dotField = dot(centreCoords, centreCoords);
 
 	// Intensity will range from 0.1 to 0.25

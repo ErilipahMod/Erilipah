@@ -99,5 +99,33 @@ namespace Erilipah
             translation.SetDefault(name);
             tile.AddMapEntry(color, translation);
         }
+
+        public static bool PlaceMultitile(int left, int top, int type, int sizeX, int sizeY, bool forced = false, int frameXOffset = 0, int frameYOffset = 0, int padding = 2)
+        {
+            int frameX = frameXOffset;
+            if (!forced)
+            {
+                for (int i = left; i < left + sizeX; i++)
+                    for (int j = top; j < top + sizeY; j++)
+                        if (Framing.GetTileSafely(i, j).active())
+                            return false;
+            }
+            for (int i = left; i < left + sizeX; i++)
+            {
+                int frameY = frameYOffset;
+                for (int j = top; j < top + sizeY; j++)
+                {
+                    Tile tile = Main.tile[i, j];
+
+                    tile.type = (ushort)type;
+                    tile.frameX = (short)frameX;
+                    tile.frameY = (short)frameY;
+                    tile.active(true);
+                    frameY += 16 + padding;
+                }
+                frameX += 16 + padding;
+            }
+            return true;
+        }
     }
 }

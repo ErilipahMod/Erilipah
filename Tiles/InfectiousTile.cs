@@ -64,14 +64,14 @@ namespace Erilipah.Tiles
                         {
                             // If we found one, convert it
                             tile.type = convertTo.Type;
-                            return true;
                         }
                         else
                         {
                             // If not, default to Infected Glob (Stone for now)
                             tile.type = (ushort)Default;
-                            return true;
                         }
+                        WorldGen.TileFrame(i, j);
+                        return true;
                     }
                 }
             }

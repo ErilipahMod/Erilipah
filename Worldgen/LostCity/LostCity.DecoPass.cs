@@ -39,11 +39,17 @@ namespace Erilipah.Worldgen.LostCity
                 ushort type = (ushort)TileType<LostChest>();
                 while (true)
                 {
+                    System.Threading.Thread.Sleep(0);
                     int i = WorldGen.genRand.Next(lostChestBuilding.Area.Left + 1, lostChestBuilding.Area.Right);
                     int j = lostChestBuilding.Area.Bottom - WorldGen.genRand.Next(lostChestBuilding.Floors) * lostChestBuilding.FloorHeight;
 
-                    WorldGen.Place2x2(i, j - 2, type, 0);
-                    if (Framing.GetTileSafely(i, j - 2).active() && Main.tile[i, j - 2].type == type)
+                    if (!WorldGen.SolidTile(i, j))
+                    {
+                        continue;
+                    }
+
+                    WorldGen.Place2x2(i, j - 1, type, 0);
+                    if (Framing.GetTileSafely(i, j - 1).active() && Main.tile[i, j - 1].type == type)
                     {
                         break;
                     }
@@ -54,8 +60,10 @@ namespace Erilipah.Worldgen.LostCity
             {
                 float bannerChance = ConfigReader.Get<float>("worldgen.lost city.banners per tile");
 
-                if (!isFloor && WorldGen.genRand.Chance(bannerChance))
-                    WorldGen.Place2xX(i, j + 1, (ushort)TileType<CityBanner>());
+                if (!isFloor && Framing.GetTileSafely(i, j).active() && WorldGen.genRand.Chance(bannerChance))
+                {
+                    TileExtensions.PlaceMultitile(i, j + 1, TileType<CityBanner>(), 2, 3);
+                }
             }
         }
     }

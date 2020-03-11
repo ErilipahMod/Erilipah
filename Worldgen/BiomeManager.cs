@@ -73,7 +73,6 @@ namespace Erilipah.Worldgen
                 {
                     biome.TileCounts += tileCounts[type];
                 }
-                biome.OnUpdateTileCounts();
             }
         }
 
@@ -82,7 +81,6 @@ namespace Erilipah.Worldgen
             foreach (var biome in biomes.Values)
             {
                 biome.TileCounts = 0;
-                biome.OnResetTileCounts();
             }
         }
     }
