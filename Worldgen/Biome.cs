@@ -26,6 +26,8 @@ namespace Erilipah.Worldgen
         public virtual void EditSpawnRange(Player player, ref int spawnRangeX, ref int spawnRangeY, ref int safeRangeX, ref int safeRangeY) { }
         public virtual void ModifySunlight(ref Color tileColor, ref Color backgroundColor, float opacity) { }
         public virtual void ModifyMusic(ref int music, ref MusicPriority priority) { }
+        public virtual void ModifyMusic(ref int music, ref MusicPriority priority) { }
+        public virtual void ModifySunlight(ref Color tileColor, ref Color backgroundColor, float fade) { }
         public virtual void Save(TagCompound compound) { }
         public virtual void Load(TagCompound compound) { }
 

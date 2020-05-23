@@ -4,6 +4,7 @@ using Erilipah.Worldgen;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
 using Terraria;
 using Terraria.ModLoader;
@@ -146,5 +147,19 @@ namespace Erilipah
                 biome.ModifySunlight(ref tileColor, ref backgroundColor, Math.Min(1, biome.TileCounts / (float)biome.TileCountThreshold));
             }
         }
+
+        #region
+
+        public override void PostSetupContent()
+        {
+            NetEasy.NetEasy.Register(this);
+        }
+
+        public override void HandlePacket(BinaryReader reader, int whoAmI)
+        {
+            NetEasy.NetEasy.HandleModule(reader, whoAmI);
+        }
+
+        #endregion
     }
 }
