@@ -1,9 +1,12 @@
 using Erilipah.Core;
 using Erilipah.UI;
+using Erilipah.Worldgen;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
+using Terraria;
 using Terraria.ModLoader;
 using Terraria.UI;
 
@@ -123,5 +126,40 @@ namespace Erilipah
                 ui.ModifyInterface(layers);
             }
         }
+
+        public override void UpdateMusic(ref int music, ref MusicPriority priority)
+        {
+            IEnumerable<Biome> enumerable = BiomeManager.GetAll();
+            if (enumerable != null)
+                foreach (var biome in enumerable)
+                {
+                    if (biome.GetInBiome(Main.LocalPlayer))
+                    {
+                        biome.ModifyMusic(ref music, ref priority);
+                    }
+                }
+        }
+
+        public override void ModifySunLightColor(ref Color tileColor, ref Color backgroundColor)
+        {
+            foreach (var biome in BiomeManager.GetAll())
+            {
+                biome.ModifySunlight(ref tileColor, ref backgroundColor, Math.Min(1, biome.TileCounts / (float)biome.TileCountThreshold));
+            }
+        }
+
+        #region
+
+        public override void PostSetupContent()
+        {
+            NetEasy.NetEasy.Register(this);
+        }
+
+        public override void HandlePacket(BinaryReader reader, int whoAmI)
+        {
+            NetEasy.NetEasy.HandleModule(reader, whoAmI);
+        }
+
+        #endregion
     }
 }
