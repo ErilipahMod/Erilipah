@@ -128,13 +128,15 @@ namespace Erilipah
 
         public override void UpdateMusic(ref int music, ref MusicPriority priority)
         {
-            foreach (var biome in BiomeManager.GetAll())
-            {
-                if (biome.GetInBiome(Main.LocalPlayer))
+            IEnumerable<Biome> enumerable = BiomeManager.GetAll();
+            if (enumerable != null)
+                foreach (var biome in enumerable)
                 {
-                    biome.ModifyMusic(ref music, ref priority);
+                    if (biome.GetInBiome(Main.LocalPlayer))
+                    {
+                        biome.ModifyMusic(ref music, ref priority);
+                    }
                 }
-            }
         }
 
         public override void ModifySunLightColor(ref Color tileColor, ref Color backgroundColor)
