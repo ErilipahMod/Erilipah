@@ -21,7 +21,7 @@
 
     "lost city": {
       "house bridge height": 8,
-      "banners per tile": 0.15
+      "banners per tile": 0.035
     }
   },
 
@@ -29,7 +29,7 @@
     "erilipah": {
       "desaturation": 0.72,
       "tint": 0.15,
-      "obstruction (low end)": 8,
+      "obstruction (low end)": 10,
       "obstruction (high end)": 25
     }
   },

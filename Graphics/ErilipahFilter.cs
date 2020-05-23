@@ -1,4 +1,5 @@
 ﻿using Erilipah.Core;
+using Erilipah.Effects;
 using Erilipah.Worldgen;
 using Erilipah.Worldgen.Epicenter;
 using Microsoft.Xna.Framework;
@@ -12,17 +13,20 @@ using Terraria;
 using Terraria.Graphics.Effects;
 using Terraria.Graphics.Shaders;
 
-namespace Erilipah.Filters
+namespace Erilipah.Graphics
 {
     public class ErilipahFilter : Filter
     {
-        private static float Intensity => MathHelper.Lerp(
+        public static ErilipahFilter Instance => Filters.Scene[ShaderLoader.ErilipahFx] as ErilipahFilter;
+
+        public float IntensityMultiplier { get; set; } = 1;
+        public float IntensityRaw => MathHelper.Lerp(
             ConfigReader.Get<float>("visuals.erilipah.obstruction (low end)"),
-            ConfigReader.Get<float>("visuals.erilipah.obstruction (high end)"), 
+            ConfigReader.Get<float>("visuals.erilipah.obstruction (high end)"),
             (float)GetIntensityAmount());
-        private static float Desaturation { get; } = ConfigReader.Get<float>("visuals.erilipah.desaturation");
-        private static float Tint { get; } = ConfigReader.Get<float>("visuals.erilipah.tint");
-        private static Vector3 TintColor { get; } = new Vector3(0.2f, 0, 0.4f);
+        public float Desaturation => ConfigReader.Get<float>("visuals.erilipah.desaturation");
+        public float Tint => ConfigReader.Get<float>("visuals.erilipah.tint");
+        public Vector3 TintColor { get; } = new Vector3(0.1f, 0, 0.2f);
 
         public ErilipahFilter(string file, string pass) : base(GetScreenShaderData(file, pass), EffectPriority.VeryHigh) { }
 
@@ -33,16 +37,12 @@ namespace Erilipah.Filters
 
         private static double GetIntensityAmount()
         {
-            // If we're on the surface
-            if (Main.LocalPlayer.Center.X < Main.rockLayer * 16)
-            {
-                // Cycle through night & day
-                var dayCycle = Main.dayTime ? Main.dayLength : Main.nightLength;  
-                var cycle = Math.Sin(Math.Abs(Main.time - dayCycle / 2) / (dayCycle / 2));
-                return -(cycle - 1) / 2;
-            }
-            // Darkness the deeper you are.
-            return Main.LocalPlayer.Center.Y / 16 / Main.maxTilesY;
+            // Cycle through night & day
+            var dayCycle = Main.dayTime ? Main.dayLength : Main.nightLength;
+            var cycle = Math.Sin(Math.Abs(Main.time - dayCycle / 2) / (dayCycle / 2));
+            var normalizedCycle = (cycle + 1) / 2;
+            var depth = Main.LocalPlayer.Center.Y / 16 / Main.maxTilesY;
+            return normalizedCycle / 2 * (1f + depth);
         }
 
         public override bool IsVisible()
@@ -58,11 +58,11 @@ namespace Erilipah.Filters
 
             public override void Apply()
             {
-                UseIntensity(ErilipahFilter.Intensity);
+                UseIntensity(Instance.IntensityRaw * Instance.IntensityMultiplier);
                 UseTargetPosition(Main.LocalPlayer.Center);
-                UseColor(TintColor);
-                Shader.Parameters["uDesaturation"].SetValue(Desaturation);
-                Shader.Parameters["uTint"].SetValue(Tint);
+                UseColor(Instance.TintColor);
+                Shader.Parameters["uDesaturation"].SetValue(Instance.Desaturation);
+                Shader.Parameters["uTint"].SetValue(Instance.Tint);
 
                 base.Apply();
             }

@@ -1,5 +1,6 @@
 ﻿using Erilipah.Core;
 using Erilipah.Tiles.LostCity;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.World.Generation;
 using static Terraria.ModLoader.ModContent;
@@ -30,30 +31,28 @@ namespace Erilipah.Worldgen.LostCity
                     }
                 }
 
-                var lostChestBuilding = WorldGen.genRand.Next(buildings);
-                GenLostChest(lostChestBuilding);
+                GenLostChest(buildings);
             }
 
-            private void GenLostChest(LostBuilding lostChestBuilding)
+            private void GenLostChest(IList<LostBuilding> buildings)
             {
-                ushort type = (ushort)TileType<LostChest>();
-                while (true)
+                LostBuilding lostChestBuilding = Main.rand.Next(buildings);
+                for (int attempt = 0; attempt < 100; attempt++)
                 {
-                    System.Threading.Thread.Sleep(0);
                     int i = WorldGen.genRand.Next(lostChestBuilding.Area.Left + 1, lostChestBuilding.Area.Right);
                     int j = lostChestBuilding.Area.Bottom - WorldGen.genRand.Next(lostChestBuilding.Floors) * lostChestBuilding.FloorHeight;
 
-                    if (!WorldGen.SolidTile(i, j))
+                    if (!WorldGen.SolidTile(i, j) || !WorldGen.SolidTile(i - 1, j))
                     {
                         continue;
                     }
 
-                    WorldGen.Place2x2(i, j - 1, type, 0);
-                    if (Framing.GetTileSafely(i, j - 1).active() && Main.tile[i, j - 1].type == type)
+                    if (TileExtensions.PlaceMultitile(i - 1, j - 2, TileType<LostChest>(), 2, 2))
                     {
-                        break;
+                        return;
                     }
                 }
+                GenLostChest(buildings);
             }
 
             private void IterateFloor(int i, int j, bool isFloor)

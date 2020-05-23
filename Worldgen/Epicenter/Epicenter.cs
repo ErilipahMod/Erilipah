@@ -8,6 +8,7 @@ using Terraria.ModLoader.IO;
 using TFilters = Terraria.Graphics.Effects.Filters;
 using static Terraria.ModLoader.ModContent;
 using Erilipah.Effects;
+using Terraria.ModLoader;
 
 namespace Erilipah.Worldgen.Epicenter
 {
@@ -19,7 +20,7 @@ namespace Erilipah.Worldgen.Epicenter
 
         public override IEnumerable<int> BiomeTileTypes => new[]
         {
-            TileType<InfectedStone>(), TileType<LostBrick>()
+            TileType<InfectedStone>(), TileType<InfectedSoil>(), TileType<InfectedGlob>(), TileType<LostBrick>()
         };
 
         public override IEnumerable<IBiomeGenPass> BiomeGenPasses => new[]
@@ -37,6 +38,18 @@ namespace Erilipah.Worldgen.Epicenter
             {
                 TFilters.Scene[ShaderLoader.ErilipahFx].Deactivate();
             }
+        }
+
+        public override void ModifyMusic(ref int music, ref MusicPriority priority)
+        {
+            priority = MusicPriority.BiomeHigh;
+            music = Erilipah.Instance.GetSoundSlot(SoundType.Music, "Sounds/Music/Erilipah");
+        }
+
+        public override void ModifySunlight(ref Color tileColor, ref Color backgroundColor, float opacity)
+        {
+            backgroundColor = Color.Lerp(backgroundColor, Color.Black, 0.75f * opacity);
+            tileColor = Color.Lerp(tileColor, Color.Black, 0.5f * opacity);
         }
 
         public override void Save(TagCompound compound)

@@ -21,7 +21,7 @@ namespace Erilipah.Effects
             if (!Main.dedServ)
             {
                 //GameShaders.Misc[CoronaFx] = GetMiscShader("Effects/Distort", "CoronaFx");
-                TFilters.Scene[ErilipahFx] = new Filters.ErilipahFilter("Effects/ErilipahDistort", "Distort");
+                TFilters.Scene[ErilipahFx] = new Graphics.ErilipahFilter("Effects/ErilipahDistort", "Distort");
             }
         }
     }

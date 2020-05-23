@@ -35,9 +35,9 @@ namespace Erilipah.Tiles.LostCity
 
         public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
         {
-            r = 0.8f;
+            r = 0.7f;
             g = 0.1f;
-            b = 1.2f;
+            b = 0.8f;
         }
 
         public override void NearbyEffects(int i, int j, bool closer)

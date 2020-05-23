@@ -25,7 +25,7 @@ namespace Erilipah.Worldgen.Epicenter
                 GenerateSpikePair(Area.Center.X, 60, o_baseWidth, o_attenuation);
 
                 var i_baseWidth = ConfigReader.Get<int>("worldgen.mouth.inner spike base width");
-                var i_attenuation = ConfigReader.Get<float>("worldgen.mouth.inner spike base width");
+                var i_attenuation = ConfigReader.Get<float>("worldgen.mouth.inner spike attenuation");
                 GenerateSpikePair(Area.Center.X, 35, i_baseWidth, i_attenuation);
 
                 int pitStart = WorldgenExtensions.GetLowestInRange(Area.Center.X - 10, Area.Center.X + 10, (int)WorldGen.worldSurfaceLow, p => WorldGen.SolidOrSlopedTile(p.X, p.Y));

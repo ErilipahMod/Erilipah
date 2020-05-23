@@ -107,19 +107,5 @@ namespace Erilipah.Worldgen.LostCity
                 }
             }
         }
-
-        private class LostBuildingSerializer : TagSerializer<LostBuilding, TagCompound>
-        {
-            public override TagCompound Serialize(LostBuilding value) => new TagCompound
-            {
-                ["area"] = value.Area,
-                ["floors"] = value.Floors
-            };
-
-            public override LostBuilding Deserialize(TagCompound tag)
-            {
-                return new LostBuilding(tag.Get<Rectangle>("area"), tag.GetInt("floors"));
-            }
-        }
     }
 }
