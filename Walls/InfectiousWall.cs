@@ -11,7 +11,7 @@ namespace Erilipah.Walls
 {
     public abstract class InfectiousWall : ModWall
     {
-        public static int Default => ModContent.WallType<InfectedStoneWall>(); // TODO: make InfectedGlobWall
+        public static int Default => ModContent.WallType<InfectedStoneWall>();
 
         [AutoInit(InitHooks.Unload)]
         private static List<InfectiousWall> infectiousWalls;

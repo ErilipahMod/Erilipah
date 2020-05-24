@@ -18,7 +18,7 @@ namespace Erilipah.Tiles.LostCity
 
             dustType = DustID.t_Granite;
             drop = ModContent.ItemType<Items.LostCity.Placeables.LostBrick>();
-            soundType = 21;
+            soundType = SoundID.Tink;
             soundStyle = 1;
             mineResist = 2f;
             minPick = 100;

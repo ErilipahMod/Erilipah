@@ -17,5 +17,8 @@
     <Reference Include="ClassLibrary">
       <HintPath>lib\FastNoise.dll</HintPath>
     </Reference>
+    <Reference Include="NetEasy">
+      <HintPath>lib\NetEasy_v0.1.5.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>

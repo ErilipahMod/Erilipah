@@ -20,7 +20,7 @@ namespace Erilipah.Tiles.Epicenter
 
             dustType = DustID.Stone;
             drop = ModContent.ItemType<Items.Epicenter.Placeables.InfectedStone>();
-            soundType = 21;
+            soundType = SoundID.Tink;
             soundStyle = 1;
             mineResist = 2f;
             minPick = 65;
