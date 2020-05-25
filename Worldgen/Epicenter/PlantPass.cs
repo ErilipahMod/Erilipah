@@ -4,7 +4,7 @@ namespace Erilipah.Worldgen.Epicenter
 {
     public class PlantPass : IBiomeGenPass
     {
-        public string GenerateAfter => "";
+        public string GenerateAfter => "Dungeon";
 
         public float Weight => 300;
 

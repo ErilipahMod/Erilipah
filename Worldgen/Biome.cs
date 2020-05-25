@@ -13,6 +13,9 @@ namespace Erilipah.Worldgen
 
         public virtual bool ValidBiomeConditions(Player player) => true;
         public virtual IEnumerable<int> BiomeTileTypes => Enumerable.Empty<int>();
+        /// <summary>
+        /// Note: Biome gen passes will be executed in the reverse order in which they are enumerated.
+        /// </summary>
         public virtual IEnumerable<IBiomeGenPass> BiomeGenPasses => Enumerable.Empty<IBiomeGenPass>();
 
         public virtual int TileCountThreshold => 80;

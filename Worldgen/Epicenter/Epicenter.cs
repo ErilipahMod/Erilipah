@@ -28,7 +28,7 @@ namespace Erilipah.Worldgen.Epicenter
 
         public override IEnumerable<IBiomeGenPass> BiomeGenPasses => new IBiomeGenPass[]
         {
-            new AreaPass(), new PlantPass()
+            new PlantPass(), new AreaPass()
         };
 
         public override void OnUpdateVisuals()
