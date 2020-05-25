@@ -19,12 +19,16 @@ namespace Erilipah.Worldgen
 
         public int TileCounts { get; internal set; }
 
+        public virtual bool InBiome()
+        {
+            return TileCounts >= TileCountThreshold;
+        }
         public virtual void OnInitialize() { }
         public virtual void OnUpdateVisuals() { }
         public virtual void EditSpawnPool(IDictionary<int, float> pool, NPCSpawnInfo spawnInfo) { }
         public virtual void EditSpawnRate(Player player, ref int spawnRate, ref int maxSpawns) { }
         public virtual void EditSpawnRange(Player player, ref int spawnRangeX, ref int spawnRangeY, ref int safeRangeX, ref int safeRangeY) { }
-        public virtual void ModifySunlight(ref Color tileColor, ref Color backgroundColor, float opacity) { }
+        public virtual void ModifySunlight(ref Color tileColor, ref Color backgroundColor) { }
         public virtual void ModifyMusic(ref int music, ref MusicPriority priority) { }
         public virtual void Save(TagCompound compound) { }
         public virtual void Load(TagCompound compound) { }
@@ -34,7 +38,7 @@ namespace Erilipah.Worldgen
 
         internal void UpdateBiome(Player player)
         {
-            biomeStatuses[player.whoAmI] = TileCounts >= TileCountThreshold && ValidBiomeConditions(player);
+            biomeStatuses[player.whoAmI] = InBiome();
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Erilipah.Worldgen.Epicenter
 {
     public partial class Epicenter
     {
-        private class Pass : IBiomeGenPass
+        private class AreaPass : IBiomeGenPass
         {
             public string GenerateAfter => "Dungeon";
             public float Weight => 700;

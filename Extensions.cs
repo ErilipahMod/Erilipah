@@ -79,6 +79,25 @@ namespace Erilipah
 
     public static class TileExtensions
     {
+        public static bool AnyTilesIn(int startX, int endX, int startY, int endY)
+        {
+            if (!WorldGen.InWorld(startX, startY) || !WorldGen.InWorld(endX, endY))
+            {
+                return true;
+            }
+            for (int i = startX; i <= endX; i++)
+            {
+                for (int j = startY; j <= endY; j++)
+                {
+                    if (Framing.GetTileSafely(i, j).active())
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
         public static void Infect(int i, int j)
         {
             bool tileSuccess = InfectiousTile.InfectTile(i, j);

@@ -1,6 +1,6 @@
 displayName = Erilipah
 author = Dual, The Eri Team
 version = 0.1
-dllReferences = FastNoise, NetEasy_v0.1.5
+dllReferences = FastNoise, NetEasy_v0.1.5, NetSerializer
 includePDB = true
 buildIgnore = .gitattributes, .gitignore, .editorconfig, bin/*, obj/*, .git/*, *.exe

@@ -29,8 +29,8 @@
     "erilipah": {
       "desaturation": 0.72,
       "tint": 0.15,
-      "obstruction (low end)": 10,
-      "obstruction (high end)": 25
+      "obstruction (low end)": 2,
+      "obstruction (high end)": 10
     }
   },
 

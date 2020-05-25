@@ -20,7 +20,7 @@ namespace Erilipah.Tiles.Epicenter
             dustType = DustID.PurpleCrystalShard;
             drop = ModContent.ItemType<Items.Epicenter.Placeables.InfectedGlob>();
             soundType = SoundID.NPCHit;
-            soundStyle = 2;
+            soundStyle = 13;
             mineResist = 1.5f;
             minPick = 0;
         }

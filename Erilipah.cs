@@ -142,7 +142,7 @@ namespace Erilipah
         {
             foreach (var biome in BiomeManager.GetAll())
             {
-                biome.ModifySunlight(ref tileColor, ref backgroundColor, Math.Min(1, biome.TileCounts / (float)biome.TileCountThreshold));
+                biome.ModifySunlight(ref tileColor, ref backgroundColor);
             }
         }
 

@@ -51,8 +51,6 @@ namespace Erilipah.Worldgen.LostCity
             {
                 progress.Message = "Building up the Lost City";
 
-                // TODO: generate entrance into underground throne room
-
                 var leftSide = InstantiateBuildings(Biome.Area.X - 10, Biome.Area.Bottom, -1);
                 var rightSide = InstantiateBuildings(Biome.Area.X + 10, Biome.Area.Bottom, +1);
 

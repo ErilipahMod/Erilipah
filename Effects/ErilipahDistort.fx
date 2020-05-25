@@ -51,7 +51,7 @@ float4 Distort(float4 sampleColor : COLOR0, float2 coords : TEXCOORD0) : COLOR0
     float3 grayColor = Tint(Grayscale(trueColor.rgb));
     
     // Dampen the color according to the dotField
-    float3 darkenedColor = grayColor * (1.0 - dotField);
+    float3 darkenedColor = grayColor * max(1.0 - dotField, 0.15); // 0.15 = minimum brightness
     
     float zoomAverage = (uZoom.x + uZoom.y) / 2;
     zoomAverage *= zoomAverage;
