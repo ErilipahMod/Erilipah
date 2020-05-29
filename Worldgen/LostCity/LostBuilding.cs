@@ -3,7 +3,6 @@ using Microsoft.Xna.Framework;
 using System;
 using Terraria;
 using Terraria.ModLoader;
-using Terraria.ModLoader.IO;
 
 namespace Erilipah.Worldgen.LostCity
 {

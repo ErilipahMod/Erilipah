@@ -12,7 +12,9 @@ namespace Erilipah.Worldgen
         private readonly Dictionary<int, bool> biomeStatuses = new Dictionary<int, bool>();
 
         public virtual bool ValidBiomeConditions(Player player) => true;
+
         public virtual IEnumerable<int> BiomeTileTypes => Enumerable.Empty<int>();
+
         /// <summary>
         /// Note: Biome gen passes will be executed in the reverse order in which they are enumerated.
         /// </summary>
@@ -26,17 +28,45 @@ namespace Erilipah.Worldgen
         {
             return TileCounts >= TileCountThreshold;
         }
-        public virtual void OnInitialize() { }
-        public virtual void OnUpdateVisuals() { }
-        public virtual void EditSpawnPool(IDictionary<int, float> pool, NPCSpawnInfo spawnInfo) { }
-        public virtual void EditSpawnRate(Player player, ref int spawnRate, ref int maxSpawns) { }
-        public virtual void EditSpawnRange(Player player, ref int spawnRangeX, ref int spawnRangeY, ref int safeRangeX, ref int safeRangeY) { }
-        public virtual void ModifySunlight(ref Color tileColor, ref Color backgroundColor) { }
-        public virtual void ModifyMusic(ref int music, ref MusicPriority priority) { }
-        public virtual void Save(TagCompound compound) { }
-        public virtual void Load(TagCompound compound) { }
+
+        public virtual void OnInitialize()
+        {
+        }
+
+        public virtual void OnUpdateVisuals()
+        {
+        }
+
+        public virtual void EditSpawnPool(IDictionary<int, float> pool, NPCSpawnInfo spawnInfo)
+        {
+        }
+
+        public virtual void EditSpawnRate(Player player, ref int spawnRate, ref int maxSpawns)
+        {
+        }
+
+        public virtual void EditSpawnRange(Player player, ref int spawnRangeX, ref int spawnRangeY, ref int safeRangeX, ref int safeRangeY)
+        {
+        }
+
+        public virtual void ModifySunlight(ref Color tileColor, ref Color backgroundColor)
+        {
+        }
+
+        public virtual void ModifyMusic(ref int music, ref MusicPriority priority)
+        {
+        }
+
+        public virtual void Save(TagCompound compound)
+        {
+        }
+
+        public virtual void Load(TagCompound compound)
+        {
+        }
 
         public bool GetInBiome(Player player) => biomeStatuses.TryGetValue(player.whoAmI, out bool ret) ? ret : false;
+
         public bool SetInBiome(Player player, bool inBiome) => biomeStatuses[player.whoAmI] = inBiome;
 
         internal void UpdateBiome(Player player)

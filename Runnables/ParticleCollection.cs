@@ -13,7 +13,9 @@ namespace Erilipah.Runnables
             this.particles = particles;
         }
 
-        public ParticleCollection() : this(new List<IParticle>()) { }
+        public ParticleCollection() : this(new List<IParticle>())
+        {
+        }
 
         public void Add(IParticle particle)
         {

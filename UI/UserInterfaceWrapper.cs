@@ -4,6 +4,7 @@ using Terraria.UI;
 namespace Erilipah.UI
 {
     public delegate void ModifyInterfaceDelegate(List<GameInterfaceLayer> layers);
+
     public class UserInterfaceWrapper
     {
         public UserInterfaceWrapper(UserInterface @interface, ModifyInterfaceDelegate modifyInterface)

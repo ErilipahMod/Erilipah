@@ -28,6 +28,7 @@ namespace Erilipah.Worldgen.Epicenter
             compound[nameof(Basin)] = Basin;
             compound[nameof(Tunnels)] = Tunnels;
         }
+
         public override void Load(TagCompound compound)
         {
             Basin = compound.Get<Rectangle>(nameof(Basin));

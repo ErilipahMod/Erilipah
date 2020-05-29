@@ -1,10 +1,5 @@
 ﻿using Erilipah.Core;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Terraria;
 using Terraria.ModLoader;
 
 namespace Erilipah.Tiles
@@ -28,7 +23,9 @@ namespace Erilipah.Tiles
         }
 
         public abstract IEnumerable<int> GrowthTiles { get; }
+
         public abstract bool ShouldGrow(int i, int j);
+
         public abstract void Grow(int i, int j);
     }
 }

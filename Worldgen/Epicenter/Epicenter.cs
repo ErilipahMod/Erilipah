@@ -1,15 +1,15 @@
 ﻿using Erilipah.Core;
+using Erilipah.Effects;
+using Erilipah.Graphics;
 using Erilipah.Tiles.Epicenter;
 using Erilipah.Tiles.LostCity;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.ModLoader.IO;
-using TFilters = Terraria.Graphics.Effects.Filters;
-using static Terraria.ModLoader.ModContent;
-using Erilipah.Effects;
 using Terraria.ModLoader;
-using Erilipah.Graphics;
+using Terraria.ModLoader.IO;
+using static Terraria.ModLoader.ModContent;
+using TFilters = Terraria.Graphics.Effects.Filters;
 
 namespace Erilipah.Worldgen.Epicenter
 {

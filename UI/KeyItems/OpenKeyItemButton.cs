@@ -8,7 +8,9 @@ namespace Erilipah.UI.KeyItems
 {
     public class OpenKeyItemButton : UIImageButton
     {
-        public OpenKeyItemButton(Texture2D texture) : base(texture) { }
+        public OpenKeyItemButton(Texture2D texture) : base(texture)
+        {
+        }
 
         public override void Update(GameTime gameTime)
         {

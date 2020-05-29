@@ -43,9 +43,13 @@ namespace Erilipah.Runnables
             Erilipah.Instance.UIs.Add(uiWrapper);
         }
 
-        public virtual void Update(GameTime gameTime) { }
+        public virtual void Update(GameTime gameTime)
+        {
+        }
 
-        public virtual void Draw(SpriteBatch spriteBatch) { }
+        public virtual void Draw(SpriteBatch spriteBatch)
+        {
+        }
 
         private void PrivateUpdate(GameTime gameTime)
         {

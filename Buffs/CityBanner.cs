@@ -12,6 +12,7 @@ namespace Erilipah.Buffs
             Main.debuff[Type] = false;
             Main.buffNoTimeDisplay[Type] = true;
         }
+
         public override void Update(Player player, ref int buffIndex)
         {
             //player.I().reductionRate *= 0.50f;

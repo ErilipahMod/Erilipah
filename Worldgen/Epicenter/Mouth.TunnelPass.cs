@@ -1,8 +1,4 @@
-﻿using Erilipah.Core;
-using Microsoft.Xna.Framework;
-using Noise;
-using Terraria;
-using Terraria.World.Generation;
+﻿using Terraria.World.Generation;
 
 namespace Erilipah.Worldgen.Epicenter
 {

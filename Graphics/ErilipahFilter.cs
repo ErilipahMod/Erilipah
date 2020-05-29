@@ -5,10 +5,6 @@ using Erilipah.Worldgen.Epicenter;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.Graphics.Effects;
 using Terraria.Graphics.Shaders;
@@ -16,9 +12,10 @@ using Terraria.Graphics.Shaders;
 namespace Erilipah.Graphics
 {
     public class ErilipahFilter : Filter
-    {   
-
-        public ErilipahFilter(string file, string pass) : base(GetScreenShaderData(file, pass), EffectPriority.VeryHigh) { }
+    {
+        public ErilipahFilter(string file, string pass) : base(GetScreenShaderData(file, pass), EffectPriority.VeryHigh)
+        {
+        }
 
         public static ErilipahFilter Instance => Filters.Scene[ShaderLoader.ErilipahFx] as ErilipahFilter;
 

@@ -1,16 +1,10 @@
-﻿using Erilipah.Items.Epicenter.Placeables;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.Enums;
 using Terraria.ID;
-using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 
@@ -20,8 +14,8 @@ namespace Erilipah.Tiles.Epicenter.Plants
     {
         private const short frameSize = 18;
 
-        public override IEnumerable<int> GrowthTiles { get; } = new int[] 
-        { 
+        public override IEnumerable<int> GrowthTiles { get; } = new int[]
+        {
             ModContent.TileType<InfectedStone>(), ModContent.TileType<InfectedSoil>(), ModContent.TileType<InfectedGlob>()
         };
 
@@ -128,7 +122,7 @@ namespace Erilipah.Tiles.Epicenter.Plants
                 }
                 above.type = Type;
             }
-            else if (tile.frameY > 0) // Otherwise, we're at the top. Decrease frameY til we're 
+            else if (tile.frameY > 0) // Otherwise, we're at the top. Decrease frameY til we're
             {
                 above.type = Type;
                 above.frameX = tile.frameX;

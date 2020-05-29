@@ -34,7 +34,9 @@ namespace Erilipah.KeyItems
                 at = origin;
             }
 
-            private static void PreventInventoryToggle(On.Terraria.Player.orig_ToggleInv orig, Player self) { }
+            private static void PreventInventoryToggle(On.Terraria.Player.orig_ToggleInv orig, Player self)
+            {
+            }
 
             public override void Update(GameTime gameTime)
             {
@@ -114,7 +116,9 @@ namespace Erilipah.KeyItems
 
             private class GlowyParticle : Particle
             {
-                public GlowyParticle() : base(ModContent.GetTexture("Erilipah/KeyItems/WhiteParticle")) { }
+                public GlowyParticle() : base(ModContent.GetTexture("Erilipah/KeyItems/WhiteParticle"))
+                {
+                }
 
                 public override void Update()
                 {

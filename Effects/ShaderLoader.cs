@@ -1,9 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
-using System;
 using Terraria;
-using Terraria.Graphics.Effects;
 using Terraria.Graphics.Shaders;
-using Terraria.ModLoader;
 using TFilters = Terraria.Graphics.Effects.Filters;
 
 namespace Erilipah.Effects

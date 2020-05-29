@@ -1,6 +1,4 @@
-﻿using Erilipah.Core;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -19,7 +17,7 @@ namespace Erilipah.Tiles
 
         public override void RandomUpdate(int i, int j, int type)
         {
-            if (PlantTile.Plants.TryGetValue(type, out IEnumerable<PlantTile> plants)) 
+            if (PlantTile.Plants.TryGetValue(type, out IEnumerable<PlantTile> plants))
             {
                 foreach (var plant in plants)
                 {
@@ -27,7 +25,7 @@ namespace Erilipah.Tiles
                     {
                         plant.Grow(i, j);
                     }
-                } 
+                }
             }
         }
     }

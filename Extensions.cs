@@ -44,6 +44,7 @@ namespace Erilipah
         public static int Area(this Rectangle rect) => rect.Width * rect.Height;
 
         public static int GetInt(this NameValueCollection collection, string name) => int.Parse(collection[name]);
+
         public static float GetFloat(this NameValueCollection collection, string name) => float.Parse(collection[name]);
     }
 

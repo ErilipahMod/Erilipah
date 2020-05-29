@@ -42,6 +42,8 @@ namespace Erilipah.Runnables
             Scale += ScaleChange;
         }
 
-        public virtual void OnKill() { }
+        public virtual void OnKill()
+        {
+        }
     }
 }
