@@ -23,7 +23,7 @@ namespace Erilipah.Tiles
             {
                 foreach (var plant in plants)
                 {
-                    if (plant.ShouldGrow(i, j))
+                    if (plant.GrowthConditions(i, j) && plant.PreSpontaneousGrowth(i, j))
                     {
                         plant.Grow(i, j);
                     }

@@ -89,7 +89,7 @@ namespace Erilipah
             {
                 for (int j = startY; j <= endY; j++)
                 {
-                    if (Framing.GetTileSafely(i, j).active())
+                    if (!WorldGen.TileEmpty(i, j))
                     {
                         return true;
                     }

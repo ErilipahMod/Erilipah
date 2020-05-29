@@ -24,6 +24,10 @@ namespace Erilipah
                     typeof(KeyItem).Property("Unlocked").SetValue(obj, false);
                     break;
 
+                case "update":
+                    TileLoader.RandomUpdate(Terraria.Player.tileTargetX, Terraria.Player.tileTargetY, Terraria.Framing.GetTileSafely(Terraria.Player.tileTargetX, Terraria.Player.tileTargetY).type);
+                    break;
+
                 default:
                     caller.Reply("Not a thing");
                     break;

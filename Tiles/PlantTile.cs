@@ -28,7 +28,8 @@ namespace Erilipah.Tiles
         }
 
         public abstract IEnumerable<int> GrowthTiles { get; }
-        public abstract bool ShouldGrow(int i, int j);
+        public abstract bool PreSpontaneousGrowth(int i, int j);
+        public abstract bool GrowthConditions(int i, int j);
         public abstract void Grow(int i, int j);
     }
 }

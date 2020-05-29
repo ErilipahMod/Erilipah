@@ -7,13 +7,13 @@ namespace Erilipah.KeyItems
     public static class KeyItemManager
     {
         [AutoInit(InitHooks.Load | InitHooks.Unload)]
-        private static readonly Dictionary<Type, KeyItem> items = new Dictionary<Type, KeyItem>();
+        private static Dictionary<Type, KeyItem> items = new Dictionary<Type, KeyItem>();
 
         public static T Get<T>() where T : KeyItem => (T)items[typeof(T)];
 
         public static KeyItem Get(Type type) => items[type];
 
-        public static IEnumerable<KeyItem> GetAll() => items.Values;
+        public static IEnumerable<KeyItem> GetAll() => (items ?? (items = new Dictionary<Type, KeyItem>())).Values;
 
         [HookLoading(LoadHooks.Load)]
         private static void OnLoad()

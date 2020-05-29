@@ -1,7 +1,12 @@
-﻿using Erilipah.Items.Epicenter.Placeables;
+﻿using Erilipah.Dusts;
+using Erilipah.Items.Epicenter.Placeables;
+using Erilipah.Packets.Effects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Mono.Cecil.Pdb;
+using NetEasy;
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -48,7 +53,7 @@ namespace Erilipah.Tiles.Epicenter.Plants
             };
             TileObjectData.addTile(Type);
 
-            dustType = DustID.PurpleCrystalShard;
+            dustType = ModContent.DustType<CrystallineDust>();
 
             soundType = SoundID.Item;
             soundStyle = 50;
@@ -76,47 +81,58 @@ namespace Erilipah.Tiles.Epicenter.Plants
 
         public override void RandomUpdate(int i, int j)
         {
-            Tile tile = Framing.GetTileSafely(i, j);
-
-            if (WorldGen.InWorld(i, j - 1) && (!Framing.GetTileSafely(i, j - 1).active() || Main.tile[i, j - 1].type == Type))
+            // Only update the stalk if there's no tiles above us (AKA we're at the top)
+            // This keeps growth rate constant.
+            if (WorldGen.InWorld(i, j, 2) && WorldGen.TileEmpty(i, j - 1))
             {
-                GrowVertically(i, j, tile);
-            }
-
-            if (WorldGen.InWorld(i, j, 2) && Main.tile[i, j + 1].type != Type)
-            {
+                GrowVertically(i, j);
                 GrowHorizontally(i, j);
+                if (!WorldGen.gen)
+                {
+                    ChainFx(i, j);
+                }
+            }
+        }
+
+        private void ChainFx(int i, int j)
+        {
+            // Make fancy vfx
+            new SpawnCrystallineStalkDust(new Vector2(i + Main.rand.NextFloat(-0.25f, 1.25f), j) * 16).Send();
+
+            // Recurse.
+            if (j + 1 < Main.maxTilesY)
+            {
+                Tile below = Framing.GetTileSafely(i, j + 1);
+                if (below.active() && below.type == Type)
+                {
+                    ChainFx(i, j + 1);
+                }
             }
         }
 
         private void GrowHorizontally(int i, int j)
         {
-            int direction = Main.rand.NextBool().ToDirectionInt();
-            int distanceX = Main.rand.Next(1, 4);
-            int n = i + direction * distanceX;
-            for (int m = j - 1; m < j + 1; m++)
+            for (int n = i - 1; n <= i + 1; n++)
+            for (int m = j - 1; m <= j + 1; m++)
             {
                 if (GrowthConditions(n, m))
                 {
                     Grow(n, m);
                     if (Main.netMode != NetmodeID.SinglePlayer)
                         NetMessage.SendTileSquare(-1, n, m, 1);
-                    break;
+                    return;
                 }
             }
         }
 
-        private void GrowVertically(int i, int j, Tile tile)
+        private void GrowVertically(int i, int j)
         {
-            Tile above = Main.tile[i, j - 1];
+            Tile tile = Framing.GetTileSafely(i, j);
+            Tile above = Framing.GetTileSafely(i, j - 1);
 
             if (tile.frameX < 3 * frameSize) // If we're on the body of the stalk...
             {
-                if (above.type == Type)
-                {
-                    TileLoader.RandomUpdate(i, j - 1, Type);
-                }
-                else if (Main.rand.NextBool(10) || TileExtensions.AnyTilesIn(i, i, j - 7, j - 1)) // Top the stalk if there's a roof or after a random age
+                if (Main.rand.NextBool(10) || TileExtensions.AnyTilesIn(i, i, j - 7, j - 1)) // Top the stalk if there's a roof or after a random age
                 {
                     above.frameX = (short)(Main.rand.Next(3, 6) * frameSize);
                     above.frameY = 4 * frameSize;
@@ -127,32 +143,36 @@ namespace Erilipah.Tiles.Epicenter.Plants
                     above.frameY = (short)(Main.rand.Next(0, 4) * frameSize);
                 }
                 above.type = Type;
+                above.active(true);
+
+                if (Main.netMode != NetmodeID.SinglePlayer)
+                    NetMessage.SendTileSquare(-1, i, j - 1, 1);
             }
-            else if (tile.frameY > 0) // Otherwise, we're at the top. Decrease frameY til we're 
+            else if (tile.frameY > 0) // Otherwise, we're at the top. Decrease frameY
             {
                 above.type = Type;
                 above.frameX = tile.frameX;
                 above.frameY = (short)(tile.frameY - frameSize);
+                above.active(true);
+
+                if (Main.netMode != NetmodeID.SinglePlayer)
+                    NetMessage.SendTileSquare(-1, i, j - 1, 1);
             }
-            above.active(true);
-
-            if (Main.netMode != NetmodeID.SinglePlayer)
-                NetMessage.SendTileSquare(-1, i, j - 1, 1);
         }
 
-        public override bool ShouldGrow(int i, int j)
+        public override bool PreSpontaneousGrowth(int i, int j)
         {
-            return GrowthConditions(i, j) && Main.rand.NextBool(10);
+            return Main.rand.NextBool(10);
         }
 
-        private static bool GrowthConditions(int i, int j)
+        public override bool GrowthConditions(int i, int j)
         {
-            return WorldGen.InWorld(i, j, 1) && !TileExtensions.AnyTilesIn(i, i, j - 7, j - 1);
+            return WorldGen.InWorld(i, j, 1) && TileObject.CanPlace(i, j - 1, Type, 0, 0, out _, true) && !TileExtensions.AnyTilesIn(i, i, j - 20, j - 1);
         }
 
         public override void Grow(int i, int j)
         {
-            WorldGen.PlaceTile(i, j - 1, Type);
+            WorldGen.PlaceTile(i, j - 1, Type, true);
         }
     }
 }

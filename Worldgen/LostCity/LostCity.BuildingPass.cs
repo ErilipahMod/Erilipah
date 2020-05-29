@@ -51,8 +51,8 @@ namespace Erilipah.Worldgen.LostCity
             {
                 progress.Message = "Building up the Lost City";
 
-                var leftSide = InstantiateBuildings(Biome.Area.X - 10, Biome.Area.Bottom, -1);
-                var rightSide = InstantiateBuildings(Biome.Area.X + 10, Biome.Area.Bottom, +1);
+                var leftSide = InstantiateBuildings(Biome.Area.Center.X - 10, Biome.Area.Bottom, -1);
+                var rightSide = InstantiateBuildings(Biome.Area.Center.X + 10, Biome.Area.Bottom, +1);
 
                 ErectBuildings(leftSide);
                 ErectBuildings(rightSide);

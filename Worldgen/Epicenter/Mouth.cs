@@ -18,7 +18,7 @@ namespace Erilipah.Worldgen.Epicenter
 
         public override IEnumerable<IBiomeGenPass> BiomeGenPasses => new IBiomeGenPass[]
         {
-            new MouthPass(), new TunnelPass()
+            new MouthPass()
         };
 
         public override bool ValidBiomeConditions(Player player) => player.Center.Y < Main.worldSurface * 16;

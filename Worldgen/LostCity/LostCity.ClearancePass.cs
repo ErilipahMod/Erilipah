@@ -19,8 +19,8 @@ namespace Erilipah.Worldgen.LostCity
 
                 progress.Message = "Clearing out the Lost City";
 
-                Rectangle tunnels = BiomeManager.Get<Epicenter.Mouth>().Tunnels;
-                Rectangle area = BiomeManager.Get<LostCity>().Area = new Rectangle(tunnels.X, tunnels.Bottom - 10, tunnels.Width, lostCityHeight);
+                Rectangle basin = BiomeManager.Get<Epicenter.Mouth>().Basin;
+                Rectangle area = BiomeManager.Get<LostCity>().Area = new Rectangle(basin.X - basin.Width / 2, basin.Bottom - 2, basin.Width * 2, lostCityHeight);
 
                 var noise = new FastNoise(WorldGen._genRandSeed)
                 {
@@ -40,6 +40,10 @@ namespace Erilipah.Worldgen.LostCity
                         if (result < -0.52f * (1 + middleDist))
                         {
                             WorldGen.KillTile(i, j);
+                        }
+                        else if (WorldGen.TileEmpty(i, j))
+                        {
+                            WorldGen.PlaceTile(i, j, Tiles.InfectiousTile.Default, true);
                         }
                     }
                 }

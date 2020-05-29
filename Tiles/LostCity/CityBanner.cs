@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Erilipah.Dusts;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.Enums;
@@ -17,15 +18,19 @@ namespace Erilipah.Tiles.LostCity
             Main.tileNoAttach[Type] = true;
             Main.tileLavaDeath[Type] = true;
 
-            TileObjectData.newTile.CopyFrom(TileObjectData.Style1x2Top);
             TileObjectData.newTile.Height = 3;
             TileObjectData.newTile.Width = 2;
+            TileObjectData.newTile.CoordinatePadding = 2;
             TileObjectData.newTile.CoordinateHeights = new[] { 16, 16, 16 };
+            TileObjectData.newTile.CoordinateWidth = 16;
             TileObjectData.newTile.AnchorTop = new AnchorData(AnchorType.SolidTile | AnchorType.SolidSide | AnchorType.SolidBottom, TileObjectData.newTile.Width, 0);
-            TileObjectData.newTile.StyleWrapLimit = 111;
+            TileObjectData.newTile.AnchorValidTiles = new int[]
+            {
+                ModContent.TileType<LostBrickUnsafe>()
+            };
             TileObjectData.addTile(Type);
 
-            dustType = DustID.PurpleCrystalShard;
+            dustType = ModContent.DustType<CrystallineDust>();
             disableSmartCursor = true;
 
             ModTranslation name = CreateMapEntryName();
@@ -49,7 +54,7 @@ namespace Erilipah.Tiles.LostCity
 
             if (Main.rand.NextBool(30))
             {
-                Dust.NewDust(new Vector2(i, j) * 16, 16, 16, dustType);
+                Dust.NewDust(new Vector2(i, j) * 16, 16, 16, DustID.HealingPlus);
             }
         }
     }

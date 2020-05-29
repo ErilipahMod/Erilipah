@@ -10,7 +10,7 @@ float2 uImageSize0;
 float2 uImageSize1;
 
 float4 CoronaFx(float4 sampleColor : COLOR0, float2 coords : TEXCOORD0) : COLOR0
-{	
+{
     // Get the center of the shader
 	float2 centreCoords = (coords - 0.5) * 2;
     
